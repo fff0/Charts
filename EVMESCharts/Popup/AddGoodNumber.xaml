@@ -1,0 +1,194 @@
+﻿<Window x:Class="EVMESCharts.Popup.AddGoodNumber"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EVMESCharts.Popup"
+        mc:Ignorable="d"
+        Title="添加良品数数据" Height="700" Width="1200">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalContentAlignment"     Value="Center" />
+            <Setter Property="VerticalContentAlignment"       Value="Center" />
+            <Setter Property="Width"                          Value="65" />
+            <Setter Property="FontSize"                       Value="14" />
+            <Setter Property="Height"                         Value="30"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment"            Value="Center" />
+            <Setter Property="VerticalAlignment"              Value="Center" />
+        </Style>
+        <Style x:Key="ContentStyle" 
+               TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment"            Value="Center" />
+            <Setter Property="VerticalAlignment"              Value="Center"/>
+            <Setter Property="TextWrapping"                   Value="Wrap"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+    </Window.Resources>
+    <Grid Background="{Binding BgColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition />
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        
+        <!--标题区-->
+        <TextBlock Text="{Binding AddGoodTitle}" FontSize="24" Foreground="{Binding FontColor}"/>
+        
+        <!--主体表格区-->
+        <DataGrid x:Name="DataGrid" 
+                  Grid.Row="1"
+                  Grid.ColumnSpan="3"
+                  Background="Transparent" 
+                  HeadersVisibility="Column" 
+                  AutoGenerateColumns="False" 
+                  CanUserAddRows="False"
+                  VerticalGridLinesBrush="Transparent" 
+                  HorizontalGridLinesBrush="WhiteSmoke"
+                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                  BorderThickness="0" 
+                  ItemsSource="{Binding AddGoodList}"
+                  Margin="50 0">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="BorderThickness"                     Value="3"/>
+                    <Setter Property="VerticalAlignment"                   Value="Center"/>
+                    <Setter Property="HorizontalContentAlignment"          Value="Center"/>
+                    <Setter Property="Background"                          Value="#3c3d59"/>
+                    <Setter Property="Foreground"                          Value="#fff"/>
+                    <Setter Property="FontWeight"                          Value="Bold"/>
+                    <Setter Property="Height"                              Value="50"/>
+                    <Setter Property="FontSize"                            Value="18"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Height"                              Value="40"/>
+                    <Setter Property="Foreground"                          Value="#fff"/>
+                    <Setter Property="Background"                          Value="#303153" />
+                    <Setter Property="HorizontalAlignment"                 Value="Center"/>
+                    <Setter Property="HorizontalContentAlignment"          Value="Center"/>
+                </Style>
+            </DataGrid.RowStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="时间"
+                                    Width="100"     
+                                    Binding="{Binding Time}"
+                                    ElementStyle="{StaticResource ContentStyle}"
+                                    IsReadOnly="True">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="生产数量"
+                                    Width="100"    
+                                    Binding="{Binding Produce}" 
+                                    ElementStyle="{StaticResource ContentStyle}"
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn Header="良品数"
+                                    Width="100"    
+                                    Binding="{Binding Good}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="烤焦"
+                                    Width="100"    
+                                    Binding="{Binding Burnt}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="冲切大小边"
+                                    Width="100"    
+                                    Binding="{Binding DieCutDiversity}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="压印"
+                                    Width="100"    
+                                    Binding="{Binding Imprint}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="网布反"
+                                    Width="100"    
+                                    Binding="{Binding FabricBack}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="上料偏位"
+                                    Width="100"    
+                                    Binding="{Binding Deviation}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="高低边"
+                                    Width="100"    
+                                    Binding="{Binding Side}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="双层底皮"
+                                    Width="100"    
+                                    Binding="{Binding DoubleLayer}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="发亮"
+                                    Width="100"    
+                                    Binding="{Binding Shine}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="孔内毛刺"
+                                    Width="100"    
+                                    Binding="{Binding Glitch}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="定型不良"
+                                    Width="100"    
+                                    Binding="{Binding ShapeBad}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="打孔不良"
+                                    Width="100"    
+                                    Binding="{Binding PunchingBad}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="褶皱"
+                                    Width="100"    
+                                    Binding="{Binding Fold}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="压轻"
+                                    Width="100"    
+                                    Binding="{Binding PressureGently}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="废料"
+                                    Width="100"    
+                                    Binding="{Binding Waste}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="脏污"
+                                    Width="100"    
+                                    Binding="{Binding Dirty}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="破损"
+                                    Width="100"    
+                                    Binding="{Binding Damaged}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+                <DataGridTextColumn Header="发蓝"
+                                    Width="100"    
+                                    Binding="{Binding Blueing}" 
+                                    ElementStyle="{StaticResource ContentStyle}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--按钮区-->
+        <Grid Grid.Row="2">
+            <Button Click="OKClick"
+                    Content="保存"
+                    FontSize="24" 
+                    Width="350" 
+                    Height="40">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background"         Value="#89cbc5"/>
+                        <Setter Property="Foreground"         Value="White"/>
+                        <Setter Property="Cursor"             Value="Hand" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"   Value="true">
+                                <Setter Property="Background" Value="#3baaa0"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
