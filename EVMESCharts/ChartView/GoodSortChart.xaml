@@ -17,9 +17,13 @@
             <!--饼状图图表，缺陷占比信息-->
             <!--LegendLocation 饼状图文本标签位置-->
             <lvc:PieChart LegendLocation="Bottom"
-                      Hoverable="True"
-                      Series="{Binding DefectPieChart}" 
-                      Foreground="{Binding FontColor}"/>
+                          Hoverable="True"
+                          Series="{Binding DefectPieChart}" 
+                          Foreground="{Binding FontColor}">
+                <lvc:PieChart.DataTooltip>
+                    <lvc:DefaultTooltip x:Name="MyPieCharttooltip"/>
+                </lvc:PieChart.DataTooltip>
+            </lvc:PieChart>
         </Grid>
 
         <!--柱状图图表，缺陷分类信息-->
@@ -29,6 +33,9 @@
                              FontSize="16"
                              Grid.Column="1"
                              Foreground="{Binding FontColor}">
+            <lvc:CartesianChart.DataTooltip>
+                <lvc:DefaultTooltip x:Name="Mytooltip"  />
+            </lvc:CartesianChart.DataTooltip>
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Title="品质分类"
                           FontSize="20"                           

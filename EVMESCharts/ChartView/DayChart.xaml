@@ -91,6 +91,9 @@
                              Margin="10" 
                              FontSize="16"
                              Foreground="{Binding FontColor}">
+            <lvc:CartesianChart.DataTooltip>
+                <lvc:DefaultTooltip x:Name="Mytooltip"  />
+            </lvc:CartesianChart.DataTooltip>
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Title="时间/小时"
                           FontSize="20"                           

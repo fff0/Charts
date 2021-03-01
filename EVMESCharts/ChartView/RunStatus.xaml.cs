@@ -61,6 +61,10 @@ namespace EVMESCharts.ChartView
             FontColor = MainWindow.WindowFontColor;
             BgColor = MainWindow.WindowBgColor;
 
+            // 提示框UI
+            Mytooltip.Foreground = System.Windows.Media.Brushes.Black;
+            Mytooltip.SelectionMode = TooltipSelectionMode.OnlySender;
+
             DataContext = this;
         }
 

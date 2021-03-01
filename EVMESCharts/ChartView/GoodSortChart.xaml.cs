@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace EVMESCharts.ChartView
     /// <summary>
     /// GoodSortChart.xaml 的交互逻辑
     /// </summary>
-    public partial class GoodSortChart : UserControl
+    public partial class GoodSortChart : UserControl, INotifyPropertyChanged
     {
         public GoodSortChart()
         {
@@ -41,6 +42,13 @@ namespace EVMESCharts.ChartView
             GetDefectPieChartList();
             // 获取柱状图数据
             GetDefectBarChartList();
+
+            // 设置提示框的字体颜色
+            Mytooltip.Foreground = System.Windows.Media.Brushes.Black;
+
+            // 提示框UI
+            MyPieCharttooltip.Foreground = System.Windows.Media.Brushes.Black;
+            MyPieCharttooltip.SelectionMode = TooltipSelectionMode.OnlySender;
 
             DataContext = this;
         }
@@ -92,32 +100,33 @@ namespace EVMESCharts.ChartView
         } = new SeriesCollection();
 
         /// <summary>
-        /// 数据集合
+        /// 柱状图数据集合
         /// </summary>
-        public List<DefectDataList> ChartDataList
+        public List<DefectDayChartData> DefectChartDataList
         {
             get;
             set;
-        } = new List<DefectDataList>();
+        } = new List<DefectDayChartData>();
 
         /// <summary>
-        /// 柱状图数据组
+        /// 柱状图数据集合
         /// </summary>
-        public class DefectDataList
+        public class DefectDayChartData
         {
             /// <summary>
             /// 产量柱状图
             /// </summary>
-            public ChartValues<DefectData> BarChartData
+            public ChartValues<DefectData> DefectLineChartData
             {
                 get;
                 set;
             } = new ChartValues<DefectData>();
         }
-
         #endregion
 
         #region 函数
+
+        #region 饼状图数据
         /// <summary>
         /// 获取饼状图数据信息
         /// </summary>
@@ -150,38 +159,70 @@ namespace EVMESCharts.ChartView
         /// <param name="i"></param>
         private void GetPieChartValue(int i)
         {
+            // 添加饼状图数据
             DefectPieChart[i].Values = new ChartValues<double> { 5 };
         }
 
+        #endregion
+
+        #region 柱状图数据
         /// <summary>
         /// 获取柱状图数据
         /// </summary>
         private void GetDefectBarChartList()
         {
-
-            ChartDataList.Add(new DefectDataList());
             BrushConverter brushconverter = new BrushConverter();
             Brush color = (Brush)brushconverter.ConvertFromString(MainWindow.ColorList[1 % MainWindow.ColorList.Length]);
             color.Opacity = 0.6;
             DefectSortList.Add(new StackedColumnSeries
             {
-                Values = new ChartValues<double>() { 1, 2, 3 },
+                Values = new ChartValues<double>(),
                 DataLabels = true,
-                Title = "",
+                Title = MainWindow.DeviceList[0],
                 Fill = color,
             });
-
-            GetBarChartValue();
+            AddBarChartValue();    // 执行添加主页面柱状图数据函数
+            OnPropertyChanged(nameof(DefectSortList));
         }
 
         /// <summary>
-        /// 获取柱状图数据
+        /// 添加柱状图数据
         /// </summary>
-        private void GetBarChartValue()
+        private void AddBarChartValue()
         {
+            // 初始化数据
+            DefectChartDataList.Add(new DefectDayChartData());
+
+            // 格式化添加数据
+            for (int i = 0; i < 10; i++)
+            {
+                DefectChartDataList[0].DefectLineChartData.Add(new DefectData
+                {
+                    Index = i,
+                    Value = (double)i + 2
+                });
+            }
+
+            // 添加柱状图数据
+            DefectSortList[0].Values = DefectChartDataList[0].DefectLineChartData;
         }
 
         #endregion
+
+        #endregion
+
+        /// <summary>
+        /// 属性变更通知
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// 属性变更函数
+        /// </summary>
+        /// <param name="propertyName">属性名</param>
+        public void OnPropertyChanged(string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
     /// <summary>

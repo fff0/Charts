@@ -136,7 +136,7 @@ namespace EVMESCharts.Popup
             DialogResult = true;
 
             Message success = new Message(0, "修改成功");
-            success.ShowDialog();
+            success.Show();
         }
 
         /// <summary>

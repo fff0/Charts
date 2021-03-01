@@ -1,4 +1,5 @@
 using EVMESCharts.Sqlite;
+using LiveCharts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,7 +23,7 @@ namespace EVMESCharts.TableList
     /// <summary>
     /// RunStatusTableView.xaml 的交互逻辑
     /// </summary>
-    public partial class RunStatusTableView : UserControl, INotifyPropertyChanged
+    public partial class RunStatusTableView : UserControl,INotifyPropertyChanged
     {
         public RunStatusTableView()
         {
@@ -37,9 +38,13 @@ namespace EVMESCharts.TableList
             AxisXMin = 0;
             AxisXMax = 10;
 
+            // 设置提示框的字体颜色
+            Mytooltip.Foreground = System.Windows.Media.Brushes.Black;
+
             DataContext = this;
         }
 
+        #region 数据定义
 
         /// <summary>
         /// 定义字体颜色
@@ -86,16 +91,42 @@ namespace EVMESCharts.TableList
         }
 
         /// <summary>
-        /// X轴格式化字符串
+        /// X轴格式化串
         /// </summary>
-        public string XFormatter
+        public Func<double, string> XFormatter
+        {
+            get;
+            private set;
+        } = (value) => value.ToString($"{0}':00'");
+
+
+        #region 定义电气消耗柱状图数据
+
+        /// <summary>
+        /// 设备用电量
+        /// </summary>
+        public ChartValues<double> ConsumePower
         {
             get;
             set;
-        }
+        } = new ChartValues<double>() { 1, 2, 5, 1, 3, 6 };
+
+        /// <summary>
+        /// 设备用气量
+        /// </summary>
+        public ChartValues<double> ConsumptionGas
+        {
+            get;
+            set;
+        } = new ChartValues<double>() { 2, 5, 3, 7, 1, 6 };
+
+        #endregion
+
+        #endregion
 
 
         private System.Timers.Timer timerNotice = null;
+
         /// <summary>
         /// 添加故障排名前十的列表
         /// </summary>
@@ -172,7 +203,6 @@ namespace EVMESCharts.TableList
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
             }

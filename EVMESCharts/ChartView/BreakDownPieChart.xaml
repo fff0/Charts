@@ -11,6 +11,10 @@
         <lvc:PieChart LegendLocation="{Binding UserLegendLocation}"
                       Hoverable="True"
                       Series="{Binding UserPieChart}" 
-                      Foreground="{Binding FontColor}"/>    
+                      Foreground="{Binding FontColor}">
+            <lvc:PieChart.DataTooltip>
+                <lvc:DefaultTooltip x:Name="Mytooltip"  />
+            </lvc:PieChart.DataTooltip>
+        </lvc:PieChart>
     </Grid>
 </UserControl>

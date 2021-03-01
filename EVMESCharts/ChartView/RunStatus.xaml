@@ -238,6 +238,9 @@
                               Series="{Binding UserPieChart}" 
                               Foreground="{Binding FontColor}"
                               FontSize="20">
+                    <lvc:PieChart.DataTooltip>
+                        <lvc:DefaultTooltip x:Name="Mytooltip"  />
+                    </lvc:PieChart.DataTooltip>
                 </lvc:PieChart>
             </Grid>
             

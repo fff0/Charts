@@ -57,6 +57,9 @@ namespace EVMESCharts.Charts
             //添加数据
             AddLineCharts();
 
+            // 设置提示框的字体颜色
+            Mytooltip.Foreground = System.Windows.Media.Brushes.Black;
+
             this.DataContext = this;
         }
 

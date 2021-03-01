@@ -128,25 +128,38 @@
                     <Grid Grid.Row="1">
                         <!--耗电/气量图表-->
                         <lvc:CartesianChart Margin="10"  LegendLocation="Top" DisableAnimations="True" Foreground="{Binding FontColor}">
+                            <lvc:CartesianChart.DataTooltip>
+                                <lvc:DefaultTooltip x:Name="Mytooltip"  />
+                            </lvc:CartesianChart.DataTooltip>
                             <lvc:CartesianChart.Series>
                                 <lvc:ColumnSeries Title = "用电量"
-                                          Values="{Binding ConsumePower}"
-                                          Fill="#60acfc"/>
+                                                  Values="{Binding ConsumePower}"
+                                                  Fill="#4792fd"
+                                                  Opacity="0.6"/>
                                 <lvc:ColumnSeries Title = "用气量"  
-                                          Values="{Binding ConsumptionGas}"
-                                          Fill="#5bc49f"/>
+                                                  Values="{Binding ConsumptionGas}"
+                                                  Fill="#7affba"
+                                                  Opacity="0.6"/>
                             </lvc:CartesianChart.Series>
                             <lvc:CartesianChart.AxisX>
-                                <lvc:Axis Title="{Binding ChartXAxisTitle}"
+                                <lvc:Axis
                                   MinValue="{Binding AxisXMin}"
                                   MaxValue="{Binding AxisXMax}"
                                   ShowLabels="True" 
-                                  LabelFormatter="{Binding XFormatter}"/>
+                                  LabelFormatter="{Binding XFormatter}">
+                                    <lvc:Axis.Separator >
+                                        <lvc:Separator Stroke="#a3a5c3" StrokeThickness="0.5"/>
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
                             </lvc:CartesianChart.AxisX>
                             <lvc:CartesianChart.AxisY>
                                 <lvc:Axis Title="消耗量"
                                   MinValue="0"  
-                                  ShowLabels="True" />
+                                  ShowLabels="True" >
+                                    <lvc:Axis.Separator >
+                                        <lvc:Separator Stroke="#a3a5c3" StrokeThickness="0.5"/>
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
                             </lvc:CartesianChart.AxisY>
                         </lvc:CartesianChart>
                     </Grid>
